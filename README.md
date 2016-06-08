@@ -22,8 +22,7 @@ config = argv(config);
 
 // show help message if --help given
 if (config.help) {
-  var cmd = process.argv[1].replace(/^.*\//, "");
-  console.warn("Usage: " + cmd + " --foo=AAA --bar.buz=BBB");
+  require("fs").createReadStream(__dirname + "/help.md").pipe(process.stderr);
   process.exit(1);
 }
 
@@ -33,6 +32,20 @@ files.forEach(function(file) {
   console.log(file);
 });
 ```
+
+## FAQ
+
+Q. Any shortcut such as `-f` instead of `--force`?
+
+A. Use more readable option `--force` at the 21th century.
+
+Q. Built-in help message feature?
+
+A. Prepare documentation file which is more useful for users.
+
+Q. Space separator "--foo bar" instead of equal separator "--foo=bar"?
+
+A. It's not supported as this module prefers less configuration.
 
 ## Install
 

@@ -1,7 +1,8 @@
 var obop = require("obop")();
 
 /**
- * "--foo.bar=baz" => {foo: {bar: "baz"}}
+ * light-weight command line arguments parser for cli application
+ * "--foo-bar=baz" => {foo: {bar: "baz"}}
  *
  * @param {Array} [args] - command line arguments
  * @returns {Function}

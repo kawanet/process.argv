@@ -15,8 +15,7 @@ config = argv(config);
 
 // show help message if --help given
 if (config.help) {
-  var cmd = process.argv[1].replace(/^.*\//, "");
-  console.warn("Usage: " + cmd + " --foo=AAA --bar.buz=BBB");
+  require("fs").createReadStream(__dirname + "/help.md").pipe(process.stderr);
   process.exit(1);
 }
 
