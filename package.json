@@ -15,6 +15,7 @@
   },
   "homepage": "https://github.com/kawanet/process.argv#readme",
   "jshintConfig": {
+    "mocha": true,
     "node": true,
     "undef": true
   },
