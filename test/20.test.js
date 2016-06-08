@@ -64,12 +64,22 @@ describe(TITLE, function() {
     assert.equal(config.qqq, "QQQ");
   });
 
-  it("argv([file])()", function() {
-    var argv = dotargv(["aaa"]);
+  var A4 = ["file"];
+  it("argv(" + JSON.stringify(A4) + ")()", function() {
+    var argv = dotargv(A4);
     var config = argv();
     assert.ok(config["--"]);
     assert.ok(config["--"] instanceof Array);
-    assert.equal(config["--"].join(","), ["aaa"].join(","));
+    assert.equal(config["--"].join(","), A4.join(","));
+  });
+
+  var A5 = "--%25=1 --%2D=2 --%3D=3".split(" ");
+  it("argv(" + JSON.stringify(A5) + ")()", function() {
+    var argv = dotargv(A5);
+    var config = argv();
+    assert.equal(config["%"], 1);
+    assert.equal(config["-"], 2);
+    assert.equal(config["="], 3);
   });
 });
 

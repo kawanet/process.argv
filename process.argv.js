@@ -43,6 +43,7 @@ function argv(args) {
   }
 
   function add(key, val) {
+    key = decodeURIComponent(key);
     var prev = $set[key];
     if (prev instanceof Array) {
       prev.push(val);

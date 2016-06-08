@@ -43,9 +43,14 @@ Q. Built-in help message feature?
 
 A. Prepare documentation file which is more useful for users.
 
-Q. Space separator "--foo bar" instead of equal separator "--foo=bar"?
+Q. Space separator `--foo bar` instead of equal separator `--foo=bar`?
 
 A. It's not supported as this module prefers less configuration.
+
+Q. Using character `-` itself as a parameter key name?
+
+A. Escape special characters: `%2D` for `-`. `%3D` for `=`. `%25` for `%`.
+Note `.` is the special special character which is not available in a key name.
 
 ## Install
 
