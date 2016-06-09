@@ -35,27 +35,30 @@ files.forEach(function(file) {
 
 ## FAQ
 
-Q. Any shortcut such as `-f` instead of `--force`?
+Q. Shortcut name such as `-f`, instead of `--force`?
 
-A. Use more readable option `--force` at the 21th century.
+A. Use more readable name `--force` at the 21st century.
 
 Q. Built-in help message feature?
 
 A. Prepare documentation file which is more useful for users.
 
-Q. Space separator `--foo bar` instead of equal separator `--foo=bar`?
+Q. Space separator `--foo bar`, instead of equal separator `--foo=bar`?
 
-A. It's not supported as this module prefers less configuration.
+A. It's not supported as this module which prefers less configuration.
 
-Q. Using character `-` itself as a parameter key name?
+Q. Using character `-` itself within a parameter key name?
 
 A. Escape special characters: `%2D` for `-`. `%3D` for `=`. `%25` for `%`.
-Note `.` is the special special character which is not available in a key name.
+
+Q. Using character `.` within a parameter key name?
+
+A. `.` is the special special character used internally. It's not available in a key.
 
 ## Install
 
 ```sh
-npm install -g kawanet/process.argv
+npm install -g process.argv
 ```
 
 ## Repository
