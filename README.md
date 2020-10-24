@@ -2,6 +2,9 @@
 
 light-weight CLI arguments parser
 
+[![Node.js CI](https://github.com/kawanet/process.argv/workflows/Node.js%20CI/badge.svg?branch=master)](https://github.com/kawanet/process.argv/actions/)
+[![npm version](https://badge.fury.io/js/process.argv.svg)](https://www.npmjs.com/package/process.argv)
+
 ## Synopsis
 
 ```js
