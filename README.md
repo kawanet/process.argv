@@ -1,24 +1,25 @@
 # process.argv.js
 
-light-weight command line arguments parser for cli application
+light-weight CLI arguments parser
+
+[![Node.js CI](https://github.com/kawanet/process.argv/workflows/Node.js%20CI/badge.svg?branch=master)](https://github.com/kawanet/process.argv/actions/)
+[![npm version](https://badge.fury.io/js/process.argv.svg)](https://www.npmjs.com/package/process.argv)
 
 ## Synopsis
 
-```sh
+```js
 #!/usr/bin/env node
 
-var argv = require("process.argv")(process.argv.slice(2));
+const argv = require("process.argv");
+const processArgv = argv(process.argv.slice(2));
 
-// default options --foo=AAA --bar-buz=BBB
-var config = {
+// apply CLI options onto defaults: --foo=AAA --bar-buz=BBB
+const config = processArgv({
   foo: "AAA",
   bar: {
     buz: "BBB"
   }
-};
-
-// apply options given on CLI arguments
-config = argv(config);
+});
 
 // show help message if --help given
 if (config.help) {
@@ -27,9 +28,38 @@ if (config.help) {
 }
 
 // rest of CLI arguments
-var files = config["--"] || [];
-files.forEach(function(file) {
-  console.log(file);
+const args = config["--"] || [];
+args.forEach(function(arg) {
+  console.log(arg);
+});
+```
+
+CLI
+
+```sh
+node cli.js --foo=aaa --bar-buz=bbb file1 file2 file3
+```
+
+## TypeScript
+
+```ts
+import argv from "process.argv";
+
+const processArgv = argv(process.argv.slice(2));
+
+interface Config {
+    foo: string;
+    bar: {
+        buz: string;
+    },
+    qux?: boolean;
+}
+
+const config = processArgv<Config>({
+    foo: "AAA",
+    bar: {
+        buz: "BBB"
+    }
 });
 ```
 
@@ -53,12 +83,12 @@ A. Escape special characters: `%2D` for `-`. `%3D` for `=`. `%25` for `%`.
 
 Q. Using character `.` within a parameter key name?
 
-A. `.` is the special special character used internally. It's not available in a key.
+A. `.` is the special character used internally. It's not available in a key.
 
 ## Install
 
 ```sh
-npm install -g process.argv
+npm install --save process.argv
 ```
 
 ## Repository
@@ -69,7 +99,7 @@ npm install -g process.argv
 
 The MIT License (MIT)
 
-Copyright (c) 2016 Yusuke Kawasaki
+Copyright (c) 2016-2020 Yusuke Kawasaki
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
