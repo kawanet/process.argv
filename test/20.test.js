@@ -1,15 +1,15 @@
 #!/usr/bin/env mocha
 
-var assert = require("assert");
+const assert = require("assert");
 
-var dotargv = require("../process.argv");
+const argv = require("../process.argv");
 
-var TITLE = __filename.replace(/^.*\//, "");
+const TITLE = __filename.replace(/^.*\//, "");
 
 describe(TITLE, function() {
-  var SAMPLE_ARGS = ["aaa", "--bbb=ccc", "--ddd", "--eee-fff=ggg", "--hhh-iii", "jjj", "--kkk-lll-mmm=nnn", "--", "ooo", "--", "ppp"];
+  const SAMPLE_ARGS = ["aaa", "--bbb=ccc", "--ddd", "--eee-fff=ggg", "--hhh-iii", "jjj", "--kkk-lll-mmm=nnn", "--", "ooo", "--", "ppp"];
 
-  var SAMPLE_CONFIG = {
+  const SAMPLE_CONFIG = {
     bbb: "CCC",
     ddd: "DDD",
     eee: {
@@ -27,8 +27,9 @@ describe(TITLE, function() {
   };
 
   it("argv([...])()", function() {
-    var argv = dotargv(SAMPLE_ARGS);
-    var config = argv(); // empty
+    const processArgv = argv(SAMPLE_ARGS);
+    const config = processArgv(); // empty
+
     assert.equal(config.bbb, "ccc");
     assert.equal(config.ddd, true);
     assert.equal(config.eee.fff, "ggg");
@@ -41,9 +42,10 @@ describe(TITLE, function() {
   });
 
   it("argv([...])({...})", function() {
-    var argv = dotargv(SAMPLE_ARGS);
-    var config = JSON.parse(JSON.stringify(SAMPLE_CONFIG)); // deep clone
-    config = argv(config);
+    const processArgv = argv(SAMPLE_ARGS);
+    const defaults = JSON.parse(JSON.stringify(SAMPLE_CONFIG)); // deep clone
+    const config = processArgv(defaults);
+
     assert.equal(config.bbb, "ccc");
     assert.equal(config.ddd, true);
     assert.equal(config.eee.fff, "ggg");
@@ -53,9 +55,10 @@ describe(TITLE, function() {
   });
 
   it("argv()({...})", function() {
-    var argv = dotargv(); // empty
-    var config = JSON.parse(JSON.stringify(SAMPLE_CONFIG)); // deep clone
-    config = argv(config);
+    const processArgv = argv(); // empty
+    const defaults = JSON.parse(JSON.stringify(SAMPLE_CONFIG)); // deep clone
+    const config = processArgv(defaults);
+
     assert.equal(config.bbb, "CCC");
     assert.equal(config.ddd, "DDD");
     assert.equal(config.eee.fff, "GGG");
@@ -64,19 +67,21 @@ describe(TITLE, function() {
     assert.equal(config.qqq, "QQQ");
   });
 
-  var A4 = ["file"];
+  const A4 = ["file"];
   it("argv(" + JSON.stringify(A4) + ")()", function() {
-    var argv = dotargv(A4);
-    var config = argv();
+    const processArgv = argv(A4);
+    const config = processArgv();
+
     assert.ok(config["--"]);
     assert.ok(config["--"] instanceof Array);
     assert.equal(config["--"].join(","), A4.join(","));
   });
 
-  var A5 = "--%25=1 --%2D=2 --%3D=3".split(" ");
+  const A5 = "--%25=1 --%2D=2 --%3D=3".split(" ");
   it("argv(" + JSON.stringify(A5) + ")()", function() {
-    var argv = dotargv(A5);
-    var config = argv();
+    const processArgv = argv(A5);
+    const config = processArgv();
+
     assert.equal(config["%"], 1);
     assert.equal(config["-"], 2);
     assert.equal(config["="], 3);
