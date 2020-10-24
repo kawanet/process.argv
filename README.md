@@ -40,6 +40,29 @@ CLI
 node cli.js --foo=aaa --bar-buz=bbb file1 file2 file3
 ```
 
+## TypeScript
+
+```ts
+import argv from "process.argv";
+
+const processArgv = argv(process.argv.slice(2));
+
+interface Config {
+    foo: string;
+    bar: {
+        buz: string;
+    },
+    qux?: boolean;
+}
+
+const config = processArgv<Config>({
+    foo: "AAA",
+    bar: {
+        buz: "BBB"
+    }
+});
+```
+
 ## FAQ
 
 Q. Shortcut name such as `-f`, instead of `--force`?
