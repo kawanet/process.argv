@@ -1,6 +1,6 @@
 #!/usr/bin/env mocha
 
-const assert = require("assert");
+const assert = require("assert").strict;
 
 const argv = require("../process.argv");
 
@@ -35,7 +35,7 @@ describe(TITLE, function() {
     assert.equal(config.eee.fff, "ggg");
     assert.equal(config.hhh.iii, true);
     assert.equal(config.kkk.lll.mmm, "nnn");
-    assert.equal(config.qqq, null);
+    assert.equal(config.qqq, undefined);
     assert.ok(config["--"]);
     assert.ok(config["--"] instanceof Array);
     assert.equal(config["--"].join(","), ["aaa", "jjj", "ooo", "--", "ppp"].join(","));
@@ -82,9 +82,9 @@ describe(TITLE, function() {
     const processArgv = argv(A5);
     const config = processArgv();
 
-    assert.equal(config["%"], 1);
-    assert.equal(config["-"], 2);
-    assert.equal(config["="], 3);
+    assert.equal(config["%"], "1");
+    assert.equal(config["-"], "2");
+    assert.equal(config["="], "3");
   });
 });
 
