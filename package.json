@@ -1,7 +1,7 @@
 {
   "name": "process.argv",
   "description": "light-weight CLI arguments parser",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "author": "@kawanet",
   "bugs": {
     "url": "https://github.com/kawanet/process.argv/issues"
@@ -41,6 +41,7 @@
     "fixpack": "fixpack",
     "jshint": "./node_modules/.bin/jshint *.js *.json test/*.js",
     "mocha": "./node_modules/.bin/mocha -R spec test/*.*.js",
+    "prepack": "npm test",
     "test": "npm run jshint && npm run mocha"
   },
   "typings": "./types/process.argv.d.ts"
