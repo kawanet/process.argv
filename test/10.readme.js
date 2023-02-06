@@ -28,7 +28,7 @@ files.forEach(function(file) {
 const TITLE = __filename.replace(/^.*\//, "");
 describe(TITLE, function() {
   it("readme", function() {
-    const assert = require("assert");
+    const assert = require("assert").strict;
     assert.ok(config.foo);
     assert.ok(config.bar.buz);
   });
