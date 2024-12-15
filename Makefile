@@ -16,7 +16,7 @@ clean:
 	s#^var obop =.*#import obopInit from "obop";\nconst obop = obopInit()#; \
 	s#^const assert = .*#import {strict as assert} from "assert";#; \
 	s#^const argv = .*#import argv from "../process.argv.mjs";#; \
-	s#__filename#"'$@'"#; \
+	s#__filename#"$@"#; \
 	s#^.*module.exports = *#export default #; \
 	' < $< > $@
 
