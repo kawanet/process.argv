@@ -12,12 +12,11 @@ clean:
 	rm -f $(ALL)
 
 %.mjs: %.js Makefile
-	perl -pe '\
-	s#^var obop =.*#import obopInit from "obop";\nconst obop = obopInit()#; \
-	s#^const assert = .*#import {strict as assert} from "assert";#; \
-	s#^const argv = .*#import argv from "../process.argv.mjs";#; \
-	s#__filename#"$@"#; \
-	s#^.*module.exports = *#export default #; \
-	' < $< > $@
+	cat < $< |\
+	sed 's#^var obop =.*#import obopInit from "obop";\nconst obop = obopInit()#;' |\
+	sed 's#^const assert = .*#import {strict as assert} from "assert";#;' |\
+	sed 's#^const argv = .*#import argv from "../process.argv.mjs";#;' |\
+	sed 's#__filename#"$@"#;' |\
+	sed 's#^.*module.exports = *#export default #;' > $@
 
 .PHONY: all clean test
