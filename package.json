@@ -13,9 +13,15 @@
     "jshint": "^2.13.6",
     "mocha": "^11.0.1"
   },
+  "exports": {
+    "types": "./types/process.argv.d.ts",
+    "import": "./process.argv.mjs",
+    "require": "./process.argv.js"
+  },
   "files": [
     "LICENSE",
     "README.md",
+    "process.argv.mjs",
     "process.argv.js",
     "types/process.argv.d.ts"
   ],
@@ -38,11 +44,11 @@
     "url": "git+https://github.com/kawanet/process.argv.git"
   },
   "scripts": {
+    "build": "make",
     "fixpack": "fixpack",
-    "jshint": "./node_modules/.bin/jshint *.js *.json test/*.js",
-    "mocha": "./node_modules/.bin/mocha -R spec test/*.*.js",
-    "prepack": "npm test",
-    "test": "npm run jshint && npm run mocha"
+    "prepack": "npm run build && npm run test",
+    "test": "make test"
   },
+  "type": "commonjs",
   "typings": "./types/process.argv.d.ts"
 }
