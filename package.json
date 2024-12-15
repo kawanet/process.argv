@@ -1,17 +1,17 @@
 {
   "name": "process.argv",
   "description": "light-weight CLI arguments parser",
-  "version": "0.6.1",
+  "version": "1.0.0",
   "author": "@kawanet",
   "bugs": {
     "url": "https://github.com/kawanet/process.argv/issues"
   },
   "dependencies": {
-    "obop": "^0.2.2"
+    "obop": "^1.0.0"
   },
   "devDependencies": {
     "jshint": "^2.13.6",
-    "mocha": "^10.2.0"
+    "mocha": "^11.0.1"
   },
   "files": [
     "LICENSE",
